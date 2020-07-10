@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:password_generator_flutter/description_card.dart';
 // import 'description_card.dart';
 // import 'description.dart';
@@ -37,16 +36,24 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
           Expanded(
             flex: 3,
             child: Container(
+              height: MediaQuery.of(context).size.height,
               color: const Color(0xFF9FBCFF),
               child: ListView(
                 shrinkWrap: true,
-                children: <Widget>[
-                  Text(
-                    "Manual"
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        "Manual",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  Container(
-                    child: DescriptionCards(storage: DescriptionStorage()),
-                  ),
+                  DescriptionCards(storage: DescriptionStorage()),
                 ],
               ),
             ),
@@ -57,8 +64,17 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
               color: const Color(0xFF74A0FF),
               child: Column(
                 children: [
-                  Text(
-                    "Password Converter"
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        "Password Converter",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -68,5 +84,4 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
       ),
     );
   }
-
 }

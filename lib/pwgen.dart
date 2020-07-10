@@ -8,5 +8,6 @@ class PasswordGeneration {
     String candidate = password + salt;
     var bytes = utf8.encode(candidate);
     var digest = sha256.convert(bytes);
+    return digest.toString();
   }
 }

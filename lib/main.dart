@@ -17,15 +17,6 @@ class PasswordGenerator extends StatefulWidget {
 }
 
 class _PasswordGeneratorState extends State<PasswordGenerator> {
-  String text = "";
-  _PasswordGeneratorState(){
-    rootBundle.loadString('assets/data/description.txt').then((value) {
-      setState(() {
-        this.text = value;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +38,14 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
             flex: 3,
             child: Container(
               color: const Color(0xFF9FBCFF),
-              child: Column(
+              child: ListView(
+                shrinkWrap: true,
                 children: <Widget>[
                   Text(
                     "Manual"
                   ),
                   Container(
-                    child: DescriptionCards(text: this.text),
+                    child: DescriptionCards(storage: DescriptionStorage()),
                   ),
                 ],
               ),
@@ -77,15 +69,4 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
     );
   }
 
-}
-
-
-class DescriptionReader {
-  String text;
-  DescriptionReader(){
-    text = "";
-    
-  }
-
-  
 }

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Description {
-  String title;
-  String contents;
-  List<TableComponent> table;
+  String title = "";
+  String contents = "";
+  List<TableComponent> table = [];
 
   Description(String getText) {
     LineSplitter ls = new LineSplitter();
@@ -32,9 +32,11 @@ class Description {
           String tableContents = "";
           int tableStatus = -1;
           while (true) {
+            print(i);
+            print("\n");
+            print(lines[i]);
             if (lines[i].contains("</tr>") || i == lines.length) {
-              table.add(new TableComponent(title: tableTitle, contents: tableContents));
-              i++;
+              table.add(TableComponent(title: tableTitle, contents: tableContents));
               break;
             } else if (lines[i].contains("<th>")) {
               tableStatus = 0;

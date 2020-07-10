@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:password_generator_flutter/description_card.dart';
-// import 'description_card.dart';
-// import 'description.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -35,51 +33,67 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
         children: [
           Expanded(
             flex: 3,
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              color: const Color(0xFF9FBCFF),
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        "Manual",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                  DescriptionCards(storage: DescriptionStorage()),
-                ],
-              ),
-            ),
+            child: DescriptionWidget(),
           ),
           Expanded(
             flex: 7,
-            child: Container(
-              color: const Color(0xFF74A0FF),
-              child: Column(
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        "Password Converter",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+            child: PasswordGenerationWidget(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Left side's view
+class DescriptionWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      color: const Color(0xFF9FBCFF),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "Manual",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
               ),
             ),
           ),
+          DescriptionCards(storage: DescriptionStorage()),
+        ],
+      ),
+    );
+  }
+}
+
+// Right side's view
+class PasswordGenerationWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xFF74A0FF),
+      child: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "Password Converter",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

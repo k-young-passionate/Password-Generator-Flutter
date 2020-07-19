@@ -19,6 +19,7 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: new IconThemeData(color: Colors.black),
         backgroundColor: const Color(0x00FFFFF0),
         title: Text(
           "Safe Password Generator",
@@ -30,18 +31,10 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
         ),
         centerTitle: true,
       ),
-      body: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: DescriptionWidget(),
-          ),
-          Expanded(
-            flex: 7,
-            child: PasswordGenerationWidget(),
-          ),
-        ],
+      drawer: Drawer(
+        child: DescriptionWidget(),
       ),
+      body: PasswordGenerationWidget(),
     );
   }
 }
@@ -56,16 +49,24 @@ class DescriptionWidget extends StatelessWidget {
       child: ListView(
         shrinkWrap: true,
         children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Manual",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+          Container(
+            height: 50.0,
+            // margin: EdgeInsets.symmetric(vertical: 5.0),
+            alignment: Alignment.center,
+            child: DrawerHeader(
+              child: Center(
+                child: Text(
+                  "Manual",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
                 ),
               ),
+              decoration: BoxDecoration(
+                color: Color(0x22000000),
+              ),
+              padding: EdgeInsets.all(2.0),
             ),
           ),
           DescriptionCards(storage: DescriptionStorage()),
@@ -230,33 +231,30 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                           ),
                         ),
                         RaisedButton(
+                          child: const Text("Generate"),
                           onPressed: () {},
                         ),
                       ])),
                 ])),
           ),
           Center(
-            child: Column(children: [
-              Text("Output"),
+              child: Column(children: [
+            Text("Output"),
+            Container(
+                child: Column(children: [
+              Text("New safe password"),
               Container(
-                child: Column(
-                  children:
-                  [
-                    Text("New safe password"),
-                    Container(
-                      color: Colors.white,
-                      child: Text(newPassword),
-                      ),
-                      RaisedButton(
-                        onPressed: (){
-                          Clipboard.setData(new ClipboardData(text: newPassword));
-                        },
-                      ),
-                  ]
-                )
-              )
-            ])
-          ),
+                color: Colors.white,
+                child: Text(newPassword),
+              ),
+              RaisedButton(
+                child: const Text("Copy to Clipboard"),
+                onPressed: () {
+                  Clipboard.setData(new ClipboardData(text: newPassword));
+                },
+              ),
+            ]))
+          ])),
         ],
       ),
     );

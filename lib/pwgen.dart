@@ -31,9 +31,9 @@ class PasswordGeneration {
       p += tmp;
     }
     int c_insufficient = p.length % 6;
-    // for(var i = c_insufficient; i<6; i++){
-    //   p += "0";
-    // }
+    for(var i = c_insufficient; i<6; i++){
+      p += "0";
+    }
     
     var BASE64 = specialCharacter ? BASE_INCLUDE_SPECIALCHAR : BASE_NOTINCLUDE_SPECIALCHAR;
     for (int c=0; c < p.length; c += 6) {

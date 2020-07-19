@@ -1,7 +1,25 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:password_generator_flutter/description_card.dart';
 import 'package:password_generator_flutter/pwgen.dart';
+
+class SizeConfig {
+  static MediaQueryData _mediaQueryData;
+  static double screenWidth;
+  static double screenHeight;
+  static double blockSizeHorizontal;
+  static double blockSizeVertical;
+
+  void init(BuildContext context) {
+    _mediaQueryData = MediaQuery.of(context);
+    screenWidth = _mediaQueryData.size.width;
+    screenHeight = _mediaQueryData.size.height;
+    blockSizeHorizontal = screenWidth / 100;
+    blockSizeVertical = screenHeight / 100;
+  }
+}
 
 void main() {
   runApp(MaterialApp(
@@ -18,6 +36,8 @@ class PasswordGenerator extends StatefulWidget {
 class _PasswordGeneratorState extends State<PasswordGenerator> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    double drawerSize = SizeConfig.screenWidth * 0.8 > 600 ? 800 : SizeConfig.screenWidth * 0.8;
     return Scaffold(
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Colors.black),
@@ -32,8 +52,11 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
         ),
         centerTitle: true,
       ),
-      drawer: Drawer(
-        child: DescriptionWidget(),
+      drawer: Container(
+        width: drawerSize,
+        child: Drawer(
+          child: DescriptionWidget(),
+        ),
       ),
       body: PasswordGenerationWidget(),
     );
@@ -96,6 +119,9 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
     final pwController = TextEditingController();
     final ezwordController = TextEditingController();
     final lengthController = TextEditingController();
+    double textfieldWidth = SizeConfig.blockSizeHorizontal * 40;
+    double tableWidth = textfieldWidth + 130;
+    double labelWidth = 80;
     return Container(
       height: MediaQuery.of(context).size.height,
       color: const Color(0xFF74A0FF),
@@ -140,13 +166,13 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                       child: Column(
                                         children: [
                                           Container(
-                                            width: 400.0,
+                                            width: tableWidth,
                                             child: Row(children: [
                                               SizedBox(
-                                                  width: 100,
+                                                  width: labelWidth,
                                                   child: Text("Password")),
                                               SizedBox(
-                                                width: 200,
+                                                width: textfieldWidth,
                                                 child: TextFormField(
                                                   obscureText: pwobscure,
                                                   controller: pwController,
@@ -155,6 +181,7 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                               Container(
                                                 alignment: Alignment.center,
                                                 child: IconButton(
+                                                  iconSize: 20,
                                                   icon: Icon(
                                                       Icons.remove_red_eye),
                                                   onPressed: () {
@@ -168,19 +195,20 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                             ]),
                                           ),
                                           Container(
-                                            width: 400.0,
+                                            width: tableWidth,
                                             child: Row(children: [
                                               SizedBox(
-                                                  width: 100,
+                                                  width: labelWidth,
                                                   child: Text("Easy words")),
                                               SizedBox(
-                                                width: 200,
+                                                width: textfieldWidth,
                                                 child: TextFormField(
                                                   obscureText: ewobscure,
                                                   controller: ezwordController,
                                                 ),
                                               ),
                                               IconButton(
+                                                iconSize: 20,
                                                 icon:
                                                     Icon(Icons.remove_red_eye),
                                                 onPressed: () {
@@ -193,17 +221,17 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                             ]),
                                           ),
                                           Container(
-                                            width: 400,
+                                            width: tableWidth,
                                             child: Row(children: [
                                               SizedBox(
-                                                  width: 100,
+                                                  width: labelWidth,
                                                   child: Text("Length")),
                                               SizedBox(
-                                                width: 200,
+                                                width: textfieldWidth,
                                                 child: TextFormField(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                    controller: lengthController,
+                                                  controller: lengthController,
                                                 ),
                                               ),
                                               Padding(
@@ -212,11 +240,11 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                             ]),
                                           ),
                                           Container(
-                                            width: 400,
+                                            width: tableWidth,
                                             height: 80,
                                             child: Row(children: [
                                               SizedBox(
-                                                  width: 100,
+                                                  width: labelWidth,
                                                   child: Center(
                                                     child: Text(
                                                         "Special Characters"),
@@ -228,7 +256,7 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                                             .center,
                                                     children: [
                                                       Container(
-                                                        width: 200,
+                                                        width: textfieldWidth,
                                                         height: 30,
                                                         child: Row(
                                                           children: [
@@ -254,7 +282,7 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                                         ),
                                                       ),
                                                       Container(
-                                                        width: 200,
+                                                        width: textfieldWidth,
                                                         height: 30,
                                                         child: Row(
                                                           children: [
@@ -286,16 +314,40 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                         ],
                                       ),
                                     ),
-                                    RaisedButton(
-                                      child: const Text("Generate"),
-                                      onPressed: () {
-                                        setState(() {
-                                          this.newPassword = PasswordGeneration.newPassword(pwController.text.length!=0?pwController.text:"", 
-                                          ezwordController.text.length!=0?ezwordController.text:"", 
-                                          lengthController.text.length!=0?int.parse(lengthController.text):0,
-                                          _includeSpecialCharacter);
-                                        });
-                                      },
+                                    Container(
+                                      width: textfieldWidth * 0.2,
+                                      height: 200,
+                                      child: RaisedButton(
+                                        child: const Text(
+                                          "Generate",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            this.newPassword =
+                                                PasswordGeneration.newPassword(
+                                                    pwController.text.length !=
+                                                            0
+                                                        ? pwController.text
+                                                        : "",
+                                                    ezwordController
+                                                                .text.length !=
+                                                            0
+                                                        ? ezwordController.text
+                                                        : "",
+                                                    lengthController
+                                                                .text.length !=
+                                                            0
+                                                        ? int.parse(
+                                                            lengthController
+                                                                .text)
+                                                        : 0,
+                                                    _includeSpecialCharacter);
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ])),
                         ),
@@ -316,23 +368,27 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                     fontWeight: FontWeight.bold,
                   )),
               Container(
-                margin: EdgeInsets.all(8.0),
-                  child: Column(children: [
-                Text("New safe password"),
-                Container(
                   margin: EdgeInsets.all(8.0),
-                  color: Colors.white,
-                  width: 400,
-                  height: 100,
-                  child: Text(newPassword),
-                ),
-                RaisedButton(
-                  child: const Text("Copy to Clipboard"),
-                  onPressed: () {
-                    Clipboard.setData(new ClipboardData(text: newPassword));
-                  },
-                ),
-              ]))
+                  child: Column(children: [
+                    Text("New safe password"),
+                    Container(
+                      margin: EdgeInsets.all(8.0),
+                      color: Colors.white,
+                      width: textfieldWidth * 2,
+                      height: 100,
+                      child: Text(
+                        newPassword,
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
+                    RaisedButton(
+                      child: const Text("Copy to Clipboard"),
+                      onPressed: () {
+                        Clipboard.setData(new ClipboardData(text: newPassword));
+                      },
+                    ),
+                  ]))
             ])),
           ),
         ],

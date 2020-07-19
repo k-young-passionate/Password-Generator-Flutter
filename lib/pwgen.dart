@@ -42,6 +42,7 @@ class PasswordGeneration {
       }
       r += BASE64[int.parse(p.substring(c, c+6), radix: 2)];
     }
+    print(r);
     return r;
   }
 

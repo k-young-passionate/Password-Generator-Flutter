@@ -19,7 +19,6 @@ jobs:
       - run: flutter build web --release
         working-directory: ./password_generator_flutter
       - run: |
-          cd build/web
           git init
           git config --global user.email kyshim9004@gmail.com
           git config --global user.name "Keonyoung Shim"

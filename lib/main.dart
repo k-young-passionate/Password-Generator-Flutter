@@ -37,7 +37,8 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double drawerSize = SizeConfig.screenWidth * 0.8 > 600 ? 800 : SizeConfig.screenWidth * 0.8;
+    double drawerSize =
+        SizeConfig.screenWidth * 0.8 > 600 ? 800 : SizeConfig.screenWidth * 0.8;
     return Scaffold(
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Colors.black),
@@ -111,6 +112,7 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
   final _pwKey = GlobalKey<FormState>();
   bool pwobscure = true;
   bool ewobscure = true;
+  bool newobscure = true;
   bool _includeSpecialCharacter = true;
   String newPassword = "Sample password";
 
@@ -372,14 +374,36 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                   child: Column(children: [
                     Text("New safe password"),
                     Container(
-                      margin: EdgeInsets.all(8.0),
-                      color: Colors.white,
-                      width: textfieldWidth * 2,
-                      height: 100,
-                      child: Text(
-                        newPassword,
-                        textAlign: TextAlign.start,
-                        overflow: TextOverflow.clip,
+                      width: textfieldWidth * 1.3 + 100,
+                      padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(8.0),
+                            color: Colors.white,
+                            width: textfieldWidth * 1.2,
+                            height: 100,
+                            child: Text(
+                              newobscure
+                                  ? '${newPassword.replaceAll(RegExp(r"."), "•")}'
+                                  : newPassword,
+                              textAlign: TextAlign.start,
+                              overflow: TextOverflow.clip,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: IconButton(
+                              iconSize: 20,
+                              icon: Icon(Icons.remove_red_eye),
+                              onPressed: () {
+                                setState(() {
+                                  this.newobscure = !this.newobscure;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     RaisedButton(

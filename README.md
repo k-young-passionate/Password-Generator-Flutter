@@ -1,16 +1,23 @@
-# password_generator_flutter
+# Password-Generator-Flutter
+Easy and safe password generator with your password and salts.
 
-A new Flutter project.
+## Usage
+1. **PASSWORD** <br>
+   Enter your password that you are usually used.
+2. **Easy Words** <br>
+   Enter some variation words like your pet name, your favorite animal name, etc.
+3. **LENGTH** <br> 
+   Enter the number you want to set the limitation of a new password length.
+4. **Special Characters** <br> 
+   Choose whether the new password includes special characters or not.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Description
+1. **It's Easy.** <br>
+   If you use this page, the three things you should remember are the original password & salt, the length of the new password, and the URL of this site.
+2. **It's Safe.** <br>
+   Nobody takes your password cause password generation is processed in 
+   <span style="font-size:1.2em;">**YOUR OWN COMPUTER** </span> 
+   you are using now. <br>
+   <span style="font-size:1.2em;">**NO TRANSMISSION YOUR PASSWORD** <br> </span>
+   Just keep your PC monitor from seeing by others.

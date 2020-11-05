@@ -21,3 +21,6 @@ Easy and safe password generator with your password and salts.
    you are using now. <br>
    <span style="font-size:1.2em;">**NO TRANSMISSION YOUR PASSWORD** <br> </span>
    Just keep your PC monitor from seeing by others.
+
+
+* This project is originated from the Password-Generator project.

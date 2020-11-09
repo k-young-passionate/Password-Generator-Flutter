@@ -17,9 +17,10 @@ jobs:
         with:
           channel: 'dev'
       - name: flutter build
-        run: flutter config --enable-web
-      - run: flutter pub get
-      - run: flutter build web --release
+        run: |
+             flutter config --enable-web
+             flutter pub get
+             flutter build web --release
       - name: find directory
         run: |
             ls

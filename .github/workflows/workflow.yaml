@@ -21,7 +21,7 @@ jobs:
              flutter pub get
              flutter build web --release
       - name: deploy
-        uses: k-young-passionate/Password-Generator-Flutter
+        uses: k-young-passionate/Password-Generator-Flutter@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.

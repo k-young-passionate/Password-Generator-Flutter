@@ -4,11 +4,11 @@ on:
     branches:
       - master
 jobs:
-  build:
+  build and deploy:
     name: Build Web
     env:
       my_secret: $
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -21,19 +21,10 @@ jobs:
              flutter config --enable-web
              flutter pub get
              flutter build web --release
-  deploy:
-      name: deploy
-      needs: [build]
-      env:
-        my_secret: $
-      runs-on: ubuntu-latest
-      steps:
-        - name: check directory
-          run: ls
-        - name: deploy to gh-pages
-          uses: JamesIves/github-pages-deploy-action@3.7.1
-          with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            BRANCH: gh-pages # The branch the action should deploy to.
-            FOLDER: build/web # The folder the action should deploy.
-            CLEAN: true # Automatically remove deleted files from the deploy branch
+      - name: deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build/web # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch

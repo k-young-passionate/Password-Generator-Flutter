@@ -23,6 +23,7 @@ jobs:
              flutter build web --release
   deploy:
       name: deploy
+      needs: [build]
       env:
         my_secret: $
       runs-on: ubuntu-latest

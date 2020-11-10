@@ -6,8 +6,8 @@ on:
 jobs:
   build_and_deploy:
     name: Build Web
-    env:
-      my_secret: $
+#     env:
+#       my_secret: $
     runs-on: macos-latest
     steps:
       - name: checkout

@@ -115,15 +115,18 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
   bool newobscure = true;
   bool _includeSpecialCharacter = true;
   String newPassword = "Sample password";
+  String pw = "";
+  String ezword = "";
 
+  final pwController = TextEditingController();
+  final ezwordController = TextEditingController();
+  final lengthController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final pwController = TextEditingController();
-    final ezwordController = TextEditingController();
-    final lengthController = TextEditingController();
     double textfieldWidth = SizeConfig.blockSizeHorizontal * 40;
     double tableWidth = textfieldWidth + 130;
     double labelWidth = 80;
+
     return Container(
       height: MediaQuery.of(context).size.height,
       color: const Color(0xFF74A0FF),
@@ -178,6 +181,9 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                                 child: TextFormField(
                                                   obscureText: pwobscure,
                                                   controller: pwController,
+                                                  onChanged: (value) {
+                                                    pw = value;
+                                                  },
                                                 ),
                                               ),
                                               Container(
@@ -190,6 +196,13 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                                     setState(() {
                                                       this.pwobscure =
                                                           !this.pwobscure;
+                                                      pwController.text = pw;
+                                                      pwController.selection =
+                                                          TextSelection.fromPosition(
+                                                              TextPosition(
+                                                                  offset: pwController
+                                                                      .text
+                                                                      .length));
                                                     });
                                                   },
                                                 ),
@@ -207,6 +220,9 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                                 child: TextFormField(
                                                   obscureText: ewobscure,
                                                   controller: ezwordController,
+                                                  onChanged: (value) {
+                                                    ezword = value;
+                                                  },
                                                 ),
                                               ),
                                               IconButton(
@@ -217,6 +233,15 @@ class _PasswordGenerationWidgetState extends State<PasswordGenerationWidget> {
                                                   setState(() {
                                                     this.ewobscure =
                                                         !this.ewobscure;
+                                                    ezwordController.text =
+                                                        ezword;
+                                                    ezwordController.selection =
+                                                        TextSelection.fromPosition(
+                                                            TextPosition(
+                                                                offset:
+                                                                    ezwordController
+                                                                        .text
+                                                                        .length));
                                                   });
                                                 },
                                               )

@@ -1,4 +1,12 @@
 # Password-Generator-Flutter
+[![Current Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/k-young-passionate/Password-Generator-Flutter)
+[![Language Badge](http://img.shields.io/badge/language-Dart-339933?style=flat&logo=dart&logoColor=white)](https://dart.dev/)
+[![Framework Badge](http://img.shields.io/badge/framework-Flutter-61DAFB?style=flat&logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Maintenance](https://img.shields.io/maintenance/yes/2021)](https://github.com/siisee11/beljaby/)
+[![Flutter Web](https://github.com/k-young-passionate/Password-Generator-Flutter/workflows/Flutter%20Web/badge.svg)](https://github.com/k-young-passionate/Password-Generator-Flutter/actions)
+
+Service Link: [Link](https://k-young-passionate.github.io/Password-Generator-Flutter/)
+
 Easy and safe password generator with your password and salts.
 
 ## Usage
